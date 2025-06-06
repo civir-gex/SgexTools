@@ -1,0 +1,49 @@
+<cfdi:Comprobante Version="3.3" Serie="5057948\202000005" Folio="0029925507" Fecha="2020-01-09T06:19:36" Sello="NF3D+S6IrcYE9Ur9eVvmtO4ia7Bm+oamMmEBKZ/zv9ax7qfKIB5yhb/XVqTsM6QexHv45LiXGN0pdpNaoh6jo2niHPDt+HyAALNPqAz64LeIVkMEUu8jn2D/O2Y/m4n/boMygLjrbjiLuZSOqeKJAOFOg4oh3fYA3k2YMWGN+hAfC7AG+MHDsBdfJEhrxSr1DAxS6T6m22jyMWGQKnTBZD7KYn/3ewaoXariO/+u8y1PKozuwQ3Cxr+qfMewJxRs03pi5qS91Lus9MqoTpm60n7Pjc1JytfkzQz0mkSSmrrFzbiqMsq1YqChpbBcH1jgFQCjfPDdvKcxMKzUu6tJHQ==" FormaPago="03" NoCertificado="00001000000413260857" Certificado="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" SubTotal="2176.68" Descuento="0.00" Moneda="MXN" TipoCambio="1.00" Total="2524.94" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="06500" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DG="http://www.hsbc.com.mx/schema/DG" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd ">
+  <cfdi:Emisor Rfc="GPT181004NV8" Nombre="GLOBAL PAYMENTS TECHNOLOGY MEXICO SA DE CV" RegimenFiscal="601"></cfdi:Emisor>
+  <cfdi:Receptor Rfc="EXP6812035X3" Nombre="EXPANSION, S.A. DE C.V." UsoCFDI="G03"></cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="A2 VOUCH NO ATEND AFIL5057948 AUT475732" ValorUnitario="749.00" Importe="749.00" Descuento="0.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="749.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="119.84"></cfdi:Traslado>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="A2 VOUCH NO ATEND AFIL5057948 AUT476614" ValorUnitario="749.00" Importe="749.00" Descuento="0.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="749.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="119.84"></cfdi:Traslado>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="COMISION TPV VTAS CR AFILIACION 505794" ValorUnitario="303.20" Importe="303.20" Descuento="0.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="303.20" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="48.51"></cfdi:Traslado>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="COMISION TPV VTAS DB AFILIACION 505794" ValorUnitario="25.48" Importe="25.48" Descuento="0.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="25.48" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="4.07"></cfdi:Traslado>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="COMISION 62CELULAR 5057948 003" ValorUnitario="350.00" Importe="350.00" Descuento="0.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="350.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="56.00"></cfdi:Traslado>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="348.26">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="348.26"></cfdi:Traslado>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="03469DE9-8FD9-45E4-BE3E-BBAF41371AC8" FechaTimbrado="2020-01-09T06:48:10" RfcProvCertif="CEC961028A98" SelloCFD="NF3D+S6IrcYE9Ur9eVvmtO4ia7Bm+oamMmEBKZ/zv9ax7qfKIB5yhb/XVqTsM6QexHv45LiXGN0pdpNaoh6jo2niHPDt+HyAALNPqAz64LeIVkMEUu8jn2D/O2Y/m4n/boMygLjrbjiLuZSOqeKJAOFOg4oh3fYA3k2YMWGN+hAfC7AG+MHDsBdfJEhrxSr1DAxS6T6m22jyMWGQKnTBZD7KYn/3ewaoXariO/+u8y1PKozuwQ3Cxr+qfMewJxRs03pi5qS91Lus9MqoTpm60n7Pjc1JytfkzQz0mkSSmrrFzbiqMsq1YqChpbBcH1jgFQCjfPDdvKcxMKzUu6tJHQ==" NoCertificadoSAT="00001000000407058485" SelloSAT="DQpW9TN2pbWaq1NaXlSfOORwzElzbu9rgLVHzqMSPvIeE+eWEW0RO6DV90Zw0hd1I62ZwJlsBBSgF13kuMBGoCAC368xptN/hQeRZU54112IL75+r4nLABpsYPt0dxRozwpc8yWyh6QELSqK+QiPUzDqKRGW50jmDvmYexAyqDhdxFuqxkgZ5822lC+6bstr8OJALLM2AZlNaCVDv2PwtjZYOw9W8dey/zhcGsMu7NYioGRK9/qrVS9M3HFbNVO1BX07P0q6s88y0pt6GRzUrQQneSp10QIzvlkvy9I9yTbkiJv0GCbLh4DfsZ8wXHSmswAGe5UaVTgE0L+/UCmkyg==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

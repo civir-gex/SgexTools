@@ -1,0 +1,47 @@
+# Entornos virtuales
+.venv/
+env/
+
+# Archivos de entorno
+.env
+*.env
+
+# Archivos temporales / caché
+__pycache__/
+*.py[cod]
+*.pyo
+*.log
+*.sqlite3
+*.db
+*.bak
+*.swp
+*.swo
+
+# Pytest
+.pytest_cache/
+.cache/
+.coverage
+htmlcov/
+
+# VSCode y editores
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos de distribución
+build/
+dist/
+*.egg-info/
+
+# Logs y archivos de salida
+logs/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Carpeta de pruebas (excluir del repo)
+test/
+
+# Respaldos
+backup*
