@@ -1,21 +1,25 @@
-import re, os, base64, hashlib
+import os
+import re
+import json
+import base64
+import hashlib
 from cryptography import x509
-from cryptography.hazmat.backends import default_backend
 from cryptography.x509.oid import NameOID
+from cryptography.exceptions import InvalidSignature
+from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.serialization import load_der_private_key
-from cryptography.exceptions import InvalidSignature
 
 class CertSAT:
     def __init__(self, path_cer: str, path_key: str = None, path_pwd: str = None):
         self.path_cer = path_cer
         self.path_key = path_key
         self.path_pwd = path_pwd
-        self._info = None
         self._cer_bytes = None
         self._key_bytes = None
         self._pwd = None
+        self._info = None
 
     def __iter__(self):
         return iter(self.info.items())
@@ -42,23 +46,19 @@ class CertSAT:
         return self._pwd
 
     def validar_correspondencia(self, cert: x509.Certificate):
-        """Valida que la llave privada corresponda al certificado público"""
         if not self.path_key or not self.path_pwd:
-            return  # No se requiere validación si no se proporcionan ambos
-
+            return
         try:
             private_key = load_der_private_key(self.key_bytes, password=self.pwd.encode(), backend=default_backend())
         except Exception as e:
             raise ValueError(f"No se pudo cargar la llave privada: {e}")
 
-        # Probar firma y verificación
-        mensaje = b"mensaje de prueba"
+        mensaje = b"test-firma"
         firma = private_key.sign(mensaje, padding.PKCS1v15(), hashes.SHA256())
-
         try:
             cert.public_key().verify(firma, mensaje, padding.PKCS1v15(), hashes.SHA256())
         except InvalidSignature:
-            raise ValueError("La llave privada no corresponde al certificado proporcionado.")
+            raise ValueError("La llave privada no corresponde al certificado.")
 
     @property
     def info(self) -> dict:
@@ -68,12 +68,7 @@ class CertSAT:
         if not os.path.exists(self.path_cer):
             raise FileNotFoundError(f"El archivo '{self.path_cer}' no existe.")
 
-        try:
-            cert = x509.load_der_x509_certificate(self.cer_bytes, default_backend())
-        except Exception as e:
-            raise ValueError(f"No se pudo leer el certificado: {e}")
-
-        # Validar que el .key y la contraseña corresponden
+        cert = x509.load_der_x509_certificate(self.cer_bytes, default_backend())
         self.validar_correspondencia(cert)
 
         subject = cert.subject
@@ -84,14 +79,12 @@ class CertSAT:
         for attr in subject:
             oid = attr.oid.dotted_string
             value = attr.value.strip()
-
             if attr.oid == NameOID.COMMON_NAME:
                 razon_social = value
             elif attr.oid == NameOID.EMAIL_ADDRESS:
                 email = value
             elif oid == "2.5.4.45":
-                partes = [x.strip() for x in value.split("/")]
-                rfc_list.extend(partes)
+                rfc_list.extend([x.strip() for x in value.split("/")])
 
         rfc_validos = [r for r in rfc_list if re.fullmatch(r"[A-Z\u00d1&]{3,4}\d{6}[A-Z0-9]{3}", r)]
         rfc_empresa = rfc_validos[0] if rfc_validos else None
@@ -109,38 +102,30 @@ class CertSAT:
             "key": self.key_bytes,
             "pwd": self.pwd,
         }
-
         return self._info
 
     def firmar(self, mensaje: bytes) -> str:
-        """Firma un mensaje y devuelve la firma en base64"""
         if not self.path_key or not self.path_pwd:
             raise ValueError("Para firmar se requiere la llave y la contraseña.")
-        try:
-            private_key = load_der_private_key(self.key_bytes, password=self.pwd.encode(), backend=default_backend())
-        except Exception as e:
-            raise ValueError(f"No se pudo cargar la llave privada: {e}")
+        private_key = load_der_private_key(self.key_bytes, password=self.pwd.encode(), backend=default_backend())
         firma = private_key.sign(mensaje, padding.PKCS1v15(), hashes.SHA256())
         return base64.b64encode(firma).decode("utf-8")
 
     def validar_firma(self, mensaje: bytes, firma_b64: str) -> bool:
-        """Valida que la firma (en base64) corresponde al certificado"""
         cert = x509.load_der_x509_certificate(self.cer_bytes, default_backend())
         try:
             firma = base64.b64decode(firma_b64)
             cert.public_key().verify(firma, mensaje, padding.PKCS1v15(), hashes.SHA256())
             return True
-        except (InvalidSignature, ValueError, TypeError):
+        except Exception:
             return False
 
     def firmar_archivo(self, path: str) -> dict:
-        """Firma un archivo, retorna dict con firma base64, hash SHA256 y nombre"""
         if not os.path.exists(path):
             raise FileNotFoundError(f"El archivo '{path}' no existe.")
 
         with open(path, "rb") as f:
             contenido = f.read()
-
         firma_b64 = self.firmar(contenido)
         sha256_hash = hashlib.sha256(contenido).hexdigest()
 
@@ -150,16 +135,62 @@ class CertSAT:
             "hash": sha256_hash
         }
 
+    def firmar_archivo_con_guardado(self, path: str, destino: str = None) -> dict:
+        resultado = self.firmar_archivo(path)
+        if destino is None:
+            destino = f"{path}.firma.json"
+        with open(destino, "w", encoding="utf-8") as f:
+            json.dump(resultado, f, indent=4, ensure_ascii=False)
+        return resultado
+
     def verificar_firma_archivo(self, path: str, firma_b64: str) -> bool:
-        """Valida que la firma corresponde al contenido del archivo"""
         if not os.path.exists(path):
             raise FileNotFoundError(f"El archivo '{path}' no existe.")
-
         with open(path, "rb") as f:
             contenido = f.read()
         return self.validar_firma(contenido, firma_b64)
 
+    def verificar_firma_desde_json(self, path_archivo: str, path_json: str) -> dict:
+        resultado = {
+            "archivo_valido": False,
+            "hash_valido": False,
+            "firma_valida": False,
+            "detalle": ""
+        }
 
+        if not os.path.exists(path_archivo):
+            resultado["detalle"] = f"Archivo no encontrado: {path_archivo}"
+            return resultado
+        if not os.path.exists(path_json):
+            resultado["detalle"] = f"Archivo de firma no encontrado: {path_json}"
+            return resultado
+
+        try:
+            with open(path_archivo, "rb") as f:
+                contenido = f.read()
+            with open(path_json, "r", encoding="utf-8") as f:
+                datos = json.load(f)
+        except Exception as e:
+            resultado["detalle"] = f"Error al leer archivos: {e}"
+            return resultado
+
+        resultado["archivo_valido"] = os.path.basename(path_archivo) == datos.get("archivo")
+        resultado["hash_valido"] = hashlib.sha256(contenido).hexdigest() == datos.get("hash")
+        resultado["firma_valida"] = self.validar_firma(contenido, datos.get("firma"))
+
+        if all([resultado["archivo_valido"], resultado["hash_valido"], resultado["firma_valida"]]):
+            resultado["detalle"] = "Verificación completa exitosa."
+        else:
+            errores = []
+            if not resultado["archivo_valido"]:
+                errores.append("nombre de archivo")
+            if not resultado["hash_valido"]:
+                errores.append("hash SHA256")
+            if not resultado["firma_valida"]:
+                errores.append("firma digital")
+            resultado["detalle"] = f"Fallo en: {', '.join(errores)}"
+
+        return resultado
 
 
 # Ejemplo de uso
