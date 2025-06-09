@@ -42,8 +42,8 @@ Thumbs.db
 
 # Carpeta de pruebas (excluir del repo)
 test/
+files/
 
 # Respaldos
 backup*
 
-files/

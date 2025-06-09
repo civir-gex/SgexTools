@@ -193,10 +193,11 @@ class CertSAT:
         return resultado
 
 
+
 # Ejemplo de uso
 cert = CertSAT("files/EXP6812035X3/EXP6812035X3.cer","files/EXP6812035X3/EXP6812035X3.key","files/EXP6812035X3/key.txt")
 for k, v in cert:
-    print(f"{k}: {v}")
+    print(f"{k}: {v}\n")
 # print(cer.info)
 
 mensaje = b"Mensaje importante"
