@@ -11,6 +11,6 @@ class CertificadoSAT(Base):
     serie = Column(String(100))
     valido_desde = Column(DateTime)
     valido_hasta = Column(DateTime)
-    cer = Column(LargeBinary, nullable=True)  # Acepta NULL
-    key = Column(LargeBinary, nullable=True)  # Acepta NULL
+    # cer = Column(LargeBinary, nullable=True)  # Acepta NULL
+    # key = Column(LargeBinary, nullable=True)  # Acepta NULL
     pwd = Column(String(255))

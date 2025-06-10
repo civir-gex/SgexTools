@@ -98,8 +98,8 @@ class CertSAT:
             "serie": str(cert.serial_number),
             "valido_desde": cert.not_valid_before_utc,
             "valido_hasta": cert.not_valid_after_utc,
-            "cer": self.cer_bytes,
-            "key": self.key_bytes,
+            # "cer": self.cer_bytes,
+            # "key": self.key_bytes,
             "pwd": self.pwd,
         }
         return self._info
